@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mymind - המוח השני שלך</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .main-content h2 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .main-content h3 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .main-content p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .main-content ul {
+            margin: 20px 0;
+            padding-right: 20px;
+        }
+
+        .main-content li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            margin: 30px 0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            border-color: #667eea;
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .posts-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .posts-section h2 {
+            color: #4a5568;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .post-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .post-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border-color: #667eea;
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+        }
+
+        .post-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .post-card p {
+            color: #64748b;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .post-card .emoji {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.2);
+        }
+
+        .warning-box h4 {
+            color: #92400e;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .conclusion-box {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            border: 2px solid #22c55e;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.2);
+        }
+
+        .conclusion-box h3 {
+            color: #166534;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .links-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .links-section h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .links-section ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .links-section li {
+            margin-bottom: 10px;
+            padding-right: 20px;
+            position: relative;
+        }
+
+        .links-section li:before {
+            content: "🔗";
+            position: absolute;
+            right: 0;
+        }
+
+        .links-section a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .links-section a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 2% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close {
+            color: #999;
+            float: left;
+            font-size: 35px;
+            font-weight: bold;
+            position: absolute;
+            top: 15px;
+            left: 25px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #667eea;
+        }
+
+        .modal h2 {
+            color: #667eea;
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+            margin-top: 20px;
+        }
+
+        .modal h3 {
+            color: #4a5568;
+            margin: 25px 0 15px 0;
+            font-size: 1.6rem;
+        }
+
+        .modal p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .modal ul {
+            margin: 15px 0;
+            padding-right: 20px;
+        }
+
+        .modal li {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .modal ol {
+            margin: 15px 0;
+            padding-right: 20px;
+        }
+
+        .modal ol li {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .main-content, .posts-section {
+                padding: 25px;
+            }
+            
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                margin: 5% auto;
+                padding: 25px;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🧠 mymind</h1>
+            <p>המוח השני שלך - שמור הכל, מצא הכל, ללא ארגון</p>
+            <a href="https://mymind.com" target="_blank" class="cta-button">נסו את mymind חינם</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h2>מה זה mymind?</h2>
+            <p>רציתי לשתף אתכם בכלי מעולה שמצאתי שממש משנה את הדרך בה אנחנו שומרים ומארגנים מידע - mymind.</p>
+            
+            <p>mymind הוא כלי לשמירת מידע דיגיטלי שפועל בצורה שונה מכל דבר שהכרנו עד כה. במקום לדרוש ממך לסדר הכל בתיקיות ותגיות מראש - הוא פשוט "זוכר" עבורך הכל באופן חכם.</p>
+
+            <h3>הרעיון מאחורי השירות</h3>
+            <p>הרעיון הבסיסי הוא פשוט אך מהפכני: לחקות את הדרך שבה המוח האמיתי שלנו עובד. אתם שומרים דברים בלחיצת כפתור אחת, ומאוחר יותר מחפשים בעזרת מילות מפתח טבעיות - בדיוק כמו שאתם זוכרים דברים במוח שלכם.</p>
+            
+            <p>ה־mymind מבין את התוכן, מזהה צבעים, טקסט, ומושגים, ומאפשר לכם למצוא הכל מאוחר יותר באופן אינטואיטיבי.</p>
+
+            <div class="feature-card">
+                <h4>🔗 תוסף לדפדפן</h4>
+                <p>הרחבת דפדפן שמאפשרת לשמור כל דף, תמונה או קטע טקסט בלחיצה אחת</p>
+            </div>
+
+            <h3>חיפוש אסוציאטיבי מתקדם</h3>
+            <ul>
+                <li><strong>חיפוש בשפה טבעית:</strong> אפשר לחפש עם כל מילה שעולה לכם בראש</li>
+                <li><strong>חיפוש לפי צבע:</strong> מציאת תמונות לפי הגוון הדומיננטי שלהן</li>
+                <li><strong>חיפוש לפי תאריך:</strong> מציאת תוכן לפי מועד השמירה</li>
+                <li><strong>חיפוש לפי מותג או מושג:</strong> הבינה המלאכותית מזהה מותגים, מוצרים ומושגים</li>
+            </ul>
+
+            <h3>מה כל כך מיוחד בו?</h3>
+            <ul>
+                <li><strong>חיפוש חכם ואינטואיטיבי:</strong> החיפוש פועל כמו המוח שלך. אתה יכול לחפש "המאמר הירוק על עיצוב" ולמצוא בדיוק מה שחיפשת, גם אם לא תייגת את זה כך.</li>
+                <li><strong>מהיר וקל לשימוש:</strong> יש הרחבה לדפדפן שמאפשרת לשמור כל דבר בקליק אחד, מבלי הצורך להיכנס כל פעם ל־mymind.</li>
+                <li><strong>ממשק נקי ויפה:</strong> mymind מעוצב פשוט ונקי, וללא שום פרסומות.</li>
+            </ul>
+
+            <div class="warning-box">
+                <h4>⚠️ חסרונות</h4>
+                <p>הוא עדיין לא תומך בעברית באופן מושלם:</p>
+                <ul>
+                    <li>החיפוש האינטואיטיבי לא עובד עדיין בעברית.</li>
+                    <li>אם תייגתם את הפריט בעברית החיפוש יעבוד גם בעברית. (רק שימו לב לרשום "#" לפני מילת החיפוש)</li>
+                </ul>
+            </div>
+
+            <div class="conclusion-box">
+                <h3>לסיכום</h3>
+                <p>אם אתם - אוספים הרבה מידע באינטרנט, שומרים מאמרים "לקרוא מאוחר יותר" ואז לא מוצאים אותם, או פשוט רוצים כלי שיעבוד כמו המוח שלכם - mymind הוא בדיוק מה שאתם מחפשים.</p>
+                <p>יש גרסת ניסיון חינמית שמאפשרת לשמור עד 100 פריטים, אני ניסיתי וממש התאהבתי! ממליץ לכם גם לנסות.</p>
+            </div>
+
+            <div class="links-section">
+                <h4>קישורים מומלצים:</h4>
+                <ul>
+                    <li><a href="https://mymind.com/" target="_blank">אתר mymind</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.mymind.access" target="_blank">אפליקציה לאנדרואיד</a></li>
+                    <li><a href="https://apps.apple.com/app/mymind/id1532801185" target="_blank">אפליקציה לאייפון</a></li>
+                    <li><a href="https://youtu.be/tKrNdFSnjNw" target="_blank">סקירה קצרה מערוץ היוטיוב הרשמי</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Posts Section -->
+        <div class="posts-section">
+            <h2>📚 מאמרים נוספים על mymind</h2>
+            <div class="posts-grid">
+                <div class="post-card" onclick="openModal('modal1')">
+                    <span class="emoji">🧠</span>
+                    <h3>איך mymind שינה לי את החיים</h3>
+                    <p>הסיפור האישי שלי עם mymind ואיך הוא פתר לי את בעיית הכאוס הדיגיטלי...</p>
+                </div>
+
+                <div class="post-card" onclick="openModal('modal2')">
+                    <span class="emoji">🎭</span>
+                    <h3>העיצוב שגורם להתאהב ב־mymind</h3>
+                    <p>למה הממשק והעיצוב של mymind הופכים את השימוש לחוויה כל כך נעימה...</p>
+                </div>
+
+                <div class="post-card" onclick="openModal('modal3')">
+                    <span class="emoji">🔍</span>
+                    <h3>מנוע החיפוש המדהים</h3>
+                    <p>סקירה מעמיקה על יכולות החיפוש המתקדמות של mymind...</p>
+                </div>
+
+                <div class="post-card" onclick="openModal('modal4')">
+                    <span class="emoji">🚀</span>
+                    <h3>Smart Spaces - מרחבים חכמים</h3>
+                    <p>איך ליצור תיקיות שמתעדכנות אוטומטית ולהפוך את הארגון לקסם...</p>
+                </div>
+
+                <div class="post-card" onclick="openModal('modal5')">
+                    <span class="emoji">🎨</span>
+                    <h3>Same Vibe - מודבורד אוטומטי</h3>
+                    <p>הכלי שכל מעצב חולם עליו - יצירת מודבורד מושלם בלחיצה אחת...</p>
+                </div>
+
+                <div class="post-card" onclick="openModal('modal6')">
+                    <span class="emoji">🕵️</span>
+                    <h3>הטריקים הסודיים של mymind</h3>
+                    <p>טיפים וטריקים נסתרים שרוב המשתמשים לא מכירים...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="background: rgba(255, 255, 255, 0.9); margin: 20px auto; max-width: 1200px; padding: 20px; border-radius: 15px; text-align: center; color: #666; font-size: 0.9rem; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);">
+        <p>⚠️ <strong>הבהרה:</strong> אתר זה הוא סקירה עצמאית ולא קשור באופן רשמי לחברת mymind. כל הזכויות על המוצר שייכות לחברת mymind.</p>
+        
+        <div style="margin: 15px 0; padding: 15px 0; border-top: 1px solid #e2e8f0;">
+            <p><strong>קישורים נוספים:</strong></p>
+            <p>
+                🔗 <a href="https://mymind.com" target="_blank" style="color: #667eea; text-decoration: none; margin: 0 15px;">האתר הרשמי של mymind</a>
+                📘 <a href="https://www.facebook.com/profile.php?id=61576882427170&locale=he_IL" target="_blank" style="color: #667eea; text-decoration: none; margin: 0 15px;">הדף שלנו בפייסבוק</a>
+            </p>
+            <p>📧 ליצירת קשר: <a href="mailto:amirbiron@gmail.com" style="color: #667eea; text-decoration: none;">amirbiron@gmail.com</a></p>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>🧠 איך mymind שינה לי את החיים (ויכול לשנות גם לכם)</h2>
+            
+            <p>אתם מכירים את התחושה הזו?</p>
+            <ul>
+                <li>📸 מוצאים תמונה מעניינת ברשת ← שומרים</li>
+                <li>📰 רואים מאמר חשוב ← שולחים לעצמכם</li>
+                <li>💡 יש רעיון גאוני במקלחת ← כותבים בפתק</li>
+            </ul>
+            
+            <p>ואחרי שבועיים? שכחתם איפה זה... 😅</p>
+            
+            <h3>💡 אפליקציית mymind פתרה לי את הבעיה הזו:</h3>
+            <ul>
+                <li>✅ שומר הכל במקום אחד (תמונות, טקסטים, קישורים, רעיונות)</li>
+                <li>✅ מוצא בעצמו קשרים בין הדברים</li>
+                <li>✅ חיפוש חכם - אפילו על פי צבעים או רגשות שהדבר מעורר</li>
+                <li>✅ בלי תיקיות מסובכות או תיוגים ידניים - פשוט זורק הכל פנימה!</li>
+            </ul>
+            
+            <h3>📸 דוגמה אמיתית:</h3>
+            <p>חיפשתי "אותו המקום הכחול עם הנוף" והוא מצא לי בדיוק את התמונה שחיפשתי! 🤯</p>
+            <p>זה כמו שיש לי גוגל אישי לכל המידע שלי.</p>
+            
+            <h3>🎯 הכי מתאים לכם אם:</h3>
+            <ul>
+                <li>אתם אוספים הרבה מידע מהרשת</li>
+                <li>תמיד שוכחים איפה שמרתם דברים</li>
+                <li>יש לכם הרבה רעיונות ואין לכם איפה לשים</li>
+                <li>נמאס לכם מהכאוס הדיגיטלי שלכם</li>
+            </ul>
+            
+            <div class="links-section">
+                <h4>🔗 קישורים שימושיים:</h4>
+                <a href="https://mymind.com" target="_blank">אתר mymind</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>העיצוב שגורם להתאהב ב־mymind 🎨</h2>
+            
+            <h3>הגריד הקסום ✨</h3>
+            <p>במקום רשימות משעממות או פולדרים מסורבלים, ‏mymind מציג את התוכן שלך בגריד דינמי וחי. זה כמו גלריה אמנות אישית - כל "כרטיס" מוצג בצורה אסתטית, והתוכן שלך נראה יפה ומקצועי.</p>
+            
+            <h3>מינימליזם שפועל 🌿</h3>
+            <p>בעולם מלא בממשקים עמוסים, ‏mymind בוחר בדרך אחרת:</p>
+            <ul>
+                <li>אין תפריטים נפתחים מסורבלים</li>
+                <li>אין מאות פילטרים מבלבלים</li>
+                <li>אין ‏UI טעון שמסיח את הדעת מהתוכן</li>
+            </ul>
+            <p>המטרה: שתחשוב כמה שפחות על הכלי עצמו.</p>
+            
+            <h3>החוויה הויזואלית 🎭</h3>
+            <p><strong>צבעים חכמים:</strong> ‏mymind לא רק שומר תמונות - הוא מזהה ומציג את הצבעים שבהן. חיפוש לפי צבע הופך להיות קל כמו לחשוב "איפה שמתי את התמונה הכחולה ההיא?"</p>
+            
+            <p><strong>‏Same Vibe - הקסם האמיתי ✨:</strong> לחצת על תמונה? אם תלחץ על כפתור ייעודי - תקבל מיד עוד תמונות עם "אותה תחושה". זה כאילו שהאפליקציה קוראת לך את המחשבות ויודעת בדיוק איזה ‏mood אתה מחפש.</p>
+            
+            <h3>הפילוסופיה של "תוכנה בלתי נראית" 👻</h3>
+            <p>"תוכנה טובה היא בלתי נראית. היא פשוט עובדת."</p>
+            <p>‏mymind מיישם את זה באמת.</p>
+            
+            <h3>עיצוב שמכבד את הדרך שבה אתה חושב 🧠</h3>
+            <p>במקום להכריח אותך להתאמן לכלל מסוים, ‏mymind מסתגל לדרך שבה המוח שלך עובד באופן טבעי:</p>
+            <ul>
+                <li>שמירה אינטואיטיבית - רואה, שומר, זוכר</li>
+                <li>חיפוש אסוציאטיבי - חושב על מילה או צבע ומוצא</li>
+                <li>גילוי מחדש - פתאום רואה דברים שחשבת ששכחת</li>
+            </ul>
+
+            <h3>מה גורם לזה להרגיש כל כך טוב? 😌</h3>
+            <p><strong>אסתטיקה שמחייכת אליך:</strong> יש משהו בעיצוב של ‏mymind שפשוט גורם לך לחייך כשאתה פותח את האפליקציה. זה לא רק פונקציונלי - זה מזמין אותך להכנס.</p>
+            
+            <p><strong>פרטיות אמיתית = שקט נפשי 🔒:</strong> אין פרסומות, אין מעקב, אין אלגוריתם שמנסה להשפיע עליך. רק אתה והדברים שחשובים לך.</p>
+            
+            <p><strong>‏Bottom line:</strong> ‏mymind לא סתם אפליקציה יפה - זה עיצוב שהופך את השימוש לחוויה. במקום להילחם עם הכלי, אתה פשוט זורם איתו. וזה בדיוק מה שאלגוריתם טוב אמור לעשות! 🌟</p>
+            
+            <div class="links-section">
+                <h4>🎥 רוצים לראות איך שומרים ומוצאים דברים ב־‏mymind?</h4>
+                <a href="https://youtu.be/LLviAwru224?si=2fmfNPbbVVG52mRZ" target="_blank">צפו בסרטון</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>החיפוש של ‏mymind - לא כמו שום דבר שהכרתם ✨</h2>
+            
+            <p>‏mymind הופך אתכם לגוגל של עצמכם. אבל לא גוגל רגיל - גוגל שקורא לכם את המחשבות ומבין איך אתם באמת חושבים.</p>
+            
+            <h3>1. חיפוש לפי הדבר הראשון שעולה לכם בראש 💭</h3>
+            <p>במקום לחשוב "איפה שמתי את זה", אתם פשוט כותבים מה שזוכרים:</p>
+            <ul>
+                <li>"משהו ירוק" ← כל מה שירוק שאי פעם שמרתם</li>
+                <li>"מאמר על שינה" ← המאמר הזה שקראתם אתמול</li>
+                <li>"השבוע שעבר" ← כל מה ששמרתם השבוע שעבר</li>
+                <li>"פיצה" ← המתכון, המקום, התמונה - הכל</li>
+            </ul>
+            <p>זה עובד כמו זיכרון אמיתי - לא צריך לזכור איפה שמתם, רק מה זה היה! 🎯</p>
+            
+            <h3>2. החיפוש המשולב - כאן זה הופך לקסם 🪄</h3>
+            <p>הטריק הכי מגניב של ‏mymind: חיפוש בשכבות!</p>
+            
+            <p><strong>דוגמה 1: חיפוש רהיטים</strong></p>
+            <ol>
+                <li>כותבים ‏"כיסא" ← רואים את כל הכיסאות</li>
+                <li>לוחצים Enter ומוסיפים ‏"כחול" ← רק כיסאות כחולים</li>
+                <li>מוסיפים ‏"עור" ← רק כיסאות כחולים מעור</li>
+            </ol>
+            
+            <p><strong>דוגמה 2: חיפוש ציטוטים</strong></p>
+            <ol>
+                <li>כותבים ‏"השבוע שעבר" ← כל מה מהשבוע שעבר</li>
+                <li>מוסיפים ‏"ציטוטים" ← רק הציטוטים מהשבוע שעבר</li>
+            </ol>
+            
+            <p>זה לא חיפוש - זה שיחה עם הזיכרון שלכם! 💫</p>
+            
+            <h3>3. חיפוש חכם שקורא כתב יד ✍️</h3>
+            <p>‏mymind יכול לקרוא:</p>
+            <ul>
+                <li>כתב יד בתמונות</li>
+                <li>טקסט בצילומי מסך</li>
+                <li>כותרות במאמרים</li>
+                <li>טקסט בתוך PDF</li>
+                <li>אפילו מילים שכתובות על מוצרים בתמונות</li>
+            </ul>
+            <p>שמרתם צילום מסך של פתק? פשוט כותבים מילה מהפתק ו־‏mymind ימצא אותו!</p>
+            
+            <h3>4. חיפוש לפי מותגים ועצמים 🏷️</h3>
+            <p>ה־AI של ‏mymind מזהה אוטומטית:</p>
+            <ul>
+                <li>מותגים: ‏"אפל", "נייקי", "סטארבקס"</li>
+                <li>עצמים: ‏"רכב", "חתול", "פיצה", "שעון"</li>
+                <li>מקומות: ‏"פריז", "חוף", "מסעדה"</li>
+                <li>רגשות: ‏"שמח", "עצוב", "רגוע"</li>
+            </ul>
+            <p>כל זה קורה אוטומטית בלי שתצטרכו לתייג משהו!</p>
+            
+            <h3>5. חיפוש לפי זמן 📅</h3>
+            <p>החיפוש הכי מדליק:</p>
+            <ul>
+                <li>‏"היום" ← מה ששמרתם היום</li>
+                <li>‏"השבוע שעבר" ← הדברים מהשבוע שעבר</li>
+                <li>‏"חודש שעבר" ← הארכיון מהחודש שעבר</li>
+                <li>‏"2023" ← כל מה מ-2023</li>
+            </ul>
+            <p>זה כמו יומן ויזואלי של החיים שלכם! 📅</p>
+            
+            <h3>6. הקסם האמיתי: מצאתם יותר ממה שחיפשתם 🌟</h3>
+            <p>הדבר הכי מדהים ב‏mymind זה שהוא חושב כמוכם:</p>
+            <ul>
+                <li>חיפשתם ‏"חתונה" ומצאתם גם שמלות, פרחים, טבעות</li>
+                <li>חיפשתם ‏"נסיעה" ומצאתם מזוודות, כרטיסי טיסה, מלונות</li>
+                <li>חיפשתם ‏"עבודה" ומצאתם מצגות, כתבות, רעיונות</li>
+            </ul>
+            <p>זה לא חיפוש לפי מילות מפתח - זה חיפוש לפי הקשר ותחושה!</p>
+            
+            <h3>הרגש של "אה! זה בדיוק מה שחיפשתי!" 🎯</h3>
+            <p>כמה פעמים גיליתם משהו במקרה וחשבתם "וואו, שכחתי שיש לי את זה!"? עם ‏mymind זה קורה כל הזמן, רק שזה לא במקרה - זה מתוכנן.</p>
+            
+            <p>החיפוש שלהם לא רק מוצא מה שחיפשתם, הוא מראה לכם דברים קשורים שלא חשבתם עליהם. זה כמו לקבל השראה מעצמכם!</p>
+            
+            <h3>גילוי קשרים בלחיצה 🔗</h3>
+            <p>כל פריט מגיע עם תיוגים אוטומטיים. רואים תיוג שמזכיר לכם משהו? לוחצים עליו ← מיד מופיעים כל הפריטים עם אותו תיוג. זה איך גם המוח עובד - רעיון אחד מוביל לרעיון אחר!</p>
+            
+            <div class="conclusion-box">
+                <h3>‏Bottom line</h3>
+                <p>לכן לטעמי ‏mymind הוא כלי החיפוש הטוב ביותר שקיים, כי בסוף - החיפוש הטוב ביותר זה זה שעובד כמו שהראש שלכם עובד - טבעי, אסוציאטיבי, ומלא הפתעות מקסימות.</p>
+            </div>
+            
+            <div class="warning-box">
+                <h4>⚠️ הערה חשובה: כרגע ‏mymind עובד בעיקר באנגלית</h4>
+                <p>זיהוי הטקסט, התיוג האוטומטי וחלק מתכונות החיפוש עובדים הכי טוב עם תוכן באנגלית. תוכן בעברית נשמר ונמצא, אבל התיוג החכם עדיין לא תומך מלא בעברית.</p>
+            </div>
+            
+            <div class="links-section">
+                <h4>🎥 רוצים לראות את החיפוש הקסום הזה בפעולה?</h4>
+                <a href="https://youtu.be/pqBMtx6g0HA?si=ONVo6QTvnY-w-vXB" target="_blank">צפו בסרטון ההדגמה</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>🔥 Smart Spaces - מרחבים חכמים</h2>
+            
+            <p>אחד הדברים הכי מגניבים ב־mymind זה שאין צורך בתיקיות - פשוט מחפשים אינטואיטיבית וכל מה ששמרתם קופץ לכם. אבל מה אם יש דברים שאתם מחפשים הרבה?</p>
+            
+            <h3>מה זה Smart Space?</h3>
+            <p>תעשו חיפוש אחד (למשל "עיצוב פנים" או "ירח דבש"), לחצו Enter, עכשיו יתקבצו לפניכם כל הפריטים ששייכים לאותו נושא, תלחצו על Save Smart Space - עכשיו לא רק שכל הפריטים של "עיצוב פנים" נכנסים ישירות לתיקיית ה־Space — מהרגע הזה, כל דבר חדש שתואם לאותו חיפוש - יכנס לאותה תיקיית Space אוטומטית!</p>
+            
+            <p>לא צריך לארגן, לא צריך לזכור להוסיף - הכל קורה בקסם.</p>
+            
+            <h3>איך זה עובד בפועל? 🪄</h3>
+            <p><strong>שלב 1:</strong> חיפוש רגיל - למשל "צילום"</p>
+            <p><strong>שלב 2:</strong> רואים את כל התמונות וההשראות שלכם בנושא צילום</p>
+            <p><strong>שלב 3:</strong> לוחצים "Save as Smart Space" ונותנים לו שם</p>
+            <p><strong>שלב 4:</strong> 🎉 מעכשיו - כל תמונה, מאמר או רעיון על צילום שתשמרו ייכנס אוטומטית לSpace הזה!</p>
+            
+            <h3>דוגמאות שימושיות:</h3>
+            <ul>
+                <li>🏠 <strong>לוח מצב רוח לעיצוב הבית</strong> - כל תמונה של רהיטים או עיצוב נכנסת אוטומטית</li>
+                <li>📚 <strong>רשימת קריאה</strong> - מאמרים ותכנים לקרוא מאוחר יותר</li>
+                <li>💡 <strong>ציטוטים מעוררי השראה</strong> - כל הציטוטים שמעוררים אותכם</li>
+                <li>✈️ <strong>תכנון ירח דבש</strong> - מקומות, מלונות, רעיונות לטיול</li>
+                <li>🎨 <strong>פרויקט עבודה</strong> - כל מה שקשור לפרויקט ספציפי</li>
+                <li>🍳 <strong>מתכונים ואוכל</strong> - תמונות מסעדות ומתכונים שמעניינים אתכם</li>
+            </ul>
+            
+            <h3>למה זה כל כך חכם? 🧠</h3>
+            <p>בניגוד לתיקיות רגילות שאתם צריכים לזכור להכניס אליהן דברים, Smart Spaces עובדים עם הAI של mymind. הם "לומדים" מה אתם מחפשים ומוסיפים דברים רלוונטיים באופן אוטומטי.</p>
+            
+            <p>זה כמו שיש לכם עוזר אישי שמארגן לכם הכל ברקע, בלי שתצטרכו לחשוב על זה.</p>
+            
+            <h3>הקסם של "אני שכחתי שיש לי את זה!" ✨</h3>
+            <p>הדבר הכי מגניב ב־Smart Spaces זה שלעיתים תגלו בהם דברים שלא זכרתם ששמרתם, אבל שמתאימים בדיוק למה שאתם מחפשים עכשיו. זה כמו לקבל מתנה מעצמכם מהעבר!</p>
+            
+            <div class="conclusion-box">
+                <h3>Bottom line</h3>
+                <p>Smart Spaces זה הדרך המושלמת ליהנות מהיתרונות של ארגון, בלי העבודה של ארגון. מymind עושה את העבודה הקשה עבורכם, ואתם פשוט נהנים מהתוצאות.</p>
+            </div>
+            
+            <div class="links-section">
+                <h4>🎥 רוצים לראות איך זה עובד?</h4>
+                <a href="https://youtu.be/pBwT_7ZZl8A" target="_blank">צפו בסרטון המלא כאן</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal5" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>🎨 הכלי שכל מעצב חולם עליו - Same Vibe של mymind! ✨</h2>
+            
+            <p>תארו לעצמכם: אתם רואים תמונה מעוררת השראה ורוצים למצוא עוד דברים דומים מהאוסף שלכם... והופ! בלחיצה אחת - מודבורד מושלם נוצר באופן קסום! 🪄</p>
+            
+            <h3>🔥 מה זה Same Vibe בכלל?</h3>
+            <p>זו תכונה מהפכנית שמנתחת כל תמונה ששמרתם ומוצאת לכם תמונות אחרות עם אותה הרגשה ויזואלית:</p>
+            
+            <ul>
+                <li>✨ <strong>לוגו מינימליסטי</strong> ← מוצא לוגואים דומים בסגנון נקי</li>
+                <li>🎨 <strong>כרזה צבעונית</strong> ← מביא כרזות עם אותה אנרגיה ופלטת צבעים</li>
+                <li>📱 <strong>צילום מסך של אפליקציה</strong> ← חושף עיצובים דומים בUI/UX</li>
+                <li>🖼️ <strong>אמנות רחוב</strong> ← גולה אמנות עם אותו מוד ותחושה</li>
+                <li>🏢 <strong>אדריכלות</strong> ← מציג בניינים עם אותה גישה עיצובית</li>
+            </ul>
+            
+            <h3>💡 למה זה משנה חיים?</h3>
+            <p><strong>לפני Same Vibe:</strong> שעות של חיפוש בתיקיות, גלילה אינסופית, וניסיון לזכור "איפה שמתי את התמונה ההיא שדומה לזה..."</p>
+            <p><strong>עם Same Vibe:</strong> לחיצה אחת = מודבורד מוכן ומושלם! 🎯</p>
+            
+            <h3>🔍 איך זה עובד בפועל?</h3>
+            <ol>
+                <li><strong>פותחים תמונה</strong> שמעוררת אתכם</li>
+                <li><strong>לוחצים על "Same Vibe"</strong> (הכפתור הקסום)</li>
+                <li><strong>מקבלים מודבורד</strong> של כל התמונות שלכם עם אותה תחושה</li>
+                <li><strong>מתפעלים</strong> מכמה הAI הבין בדיוק מה חיפשתם! 🤯</li>
+            </ol>
+            
+            <h3>🎯 מושלם עבור:</h3>
+            <ul>
+                <li><strong>מעצבים גרפיים</strong> שמחפשים השראה ורוצים לבנות מודבורד עקבי</li>
+                <li><strong>יוצרי תוכן</strong> שרוצים לשמור על אסתטיקה אחידה בפיד</li>
+                <li><strong>מנהלי קריאיטיב</strong> שבונים מותגים ורוצים לתקשר ויזואלית</li>
+                <li><strong>אדריכלים ומעצבי פנים</strong> שאוספים רפרנסים לפרויקטים</li>
+                <li><strong>כל מי שחושב ויזואלית</strong> ואוהב לגלות קשרים בין דברים!</li>
+            </ul>
+            
+            <h3>🎨 דוגמאות מהחיים האמיתיים:</h3>
+            <p><strong>תרחיש 1:</strong> אתם מעצבים לוגו לקליינט ורוצים לראות אילו סגנונות לוגו אספתם. פותחים לוגו אחד שאתם אוהבים ← Same Vibe מראה לכם את כל הלוגואים הדומים מהאוסף שלכם!</p>
+            
+            <p><strong>תרחיש 2:</strong> אתם מעצבים בית ורצים איזה כיוון עיצובי לקחת. פותחים תמונה של סלון שאתם אוהבים ← Same Vibe מביא לכם עוד חדרים עם אותה תחושה!</p>
+            
+            <p><strong>תרחיש 3:</strong> יש לכם ברייף חדש לקמפיין פרסומי. פותחים כרזה שתופסת לכם את העין ← Same Vibe מציג לכם כרזות נוספות עם אותה אנרגיה ויזואלית!</p>
+            
+            <h3>🌟 הקסם של גילוי מחדש</h3>
+            <p>הדבר הכי מגניב ב־Same Vibe זה שהוא עוזר לכם לגלות מחדש את האוסף שלכם. לעיתים תמצאו קשרים בין תמונות שלא חשבתם עליהם, ותקבלו השראה חדשה מדברים שכבר היו לכם!</p>
+            
+            <p>זה כמו שיש לכם חבר מעצב שמכיר בעל פה את כל האוסף שלכם ויודע בדיוק מה להראות לכם בכל רגע נתון.</p>
+            
+            <div class="conclusion-box">
+                <h3>Bottom line</h3>
+                <p>Same Vibe זה לא סתם תכונה - זה מהפכה בדרך שבה אנחנו חושבים על ארגון ויזואלי. במקום לארגן תמונות לפי נושאים או תאריכים, אנחנו מארגנים אותן לפי תחושה וסגנון. וזה הרבה יותר קרוב לדרך שבה המוח הקריאטיבי עובד!</p>
+            </div>
+            
+            <div class="links-section">
+                <h4>🎥 רוצים לראות את זה בפעולה?</h4>
+                <a href="https://youtu.be/6wPgjmei3kk?si=T0AHZKr3NLdk-R0v" target="_blank">צפו בסרטון ההסבר</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal6" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>הטריקים הסודיים של mymind שלא מכירים ✨</h2>
+            
+            <p>אתם כבר משתמשים ב-mymind? מעולה! אבל יש לי בשורה בשבילכם - יש בו עוד המון טריקים נסתרים שרוב האנשים לא מכירים. זה כמו למצוא דלת סודית בבית שלכם שמובילה לחדר מלא אוצרות! 🚪✨</p>
+            
+            <h3>1. הטריק הכי סודי: תיוגים נסתרים 🕵️‍♂️</h3>
+            <p><strong>רוצים להסתיר דברים רגישים מעיני המתחטטים?</strong></p>
+            <p>יש ב-mymind 3 תיוגים קסומים שהופכים כרטיסים לבלתי נראים:</p>
+            <ul>
+                <li><strong>Private</strong> - לדברים אישיים</li>
+                <li><strong>Hidden</strong> - לדברים שפשוט רוצים להסתיר</li>
+                <li><strong>NSFW</strong> - למה שלא מתאים לסביבת עבודה</li>
+            </ul>
+            
+            <p><strong>איך זה עובד:</strong></p>
+            <ol>
+                <li>נכנסים לכרטיס שרוצים להסתיר</li>
+                <li>מוסיפים אחד מהתיוגים האלה</li>
+                <li>בום! 💥 הכרטיס נעלם מהעמוד הראשי</li>
+            </ol>
+            
+            <p><strong>איך למצוא אותם חזרה?</strong> פשוט חיפוש "Private" או "Hidden" - ורק אז הם יופיעו!</p>
+            
+            <h3>2. בחירה קבוצתית - הטריק שחוסך זמן ⚡</h3>
+            <p><strong>עייפים מלתייג כרטיסים אחד אחד?</strong></p>
+            <p>סוד מספר 2: <strong>Shift + קליק</strong></p>
+            <ul>
+                <li>בוחרים כמה כרטיסים בבת אחת</li>
+                <li>מתייגים אותם יחד</li>
+                <li>או מוחקים אותם יחד</li>
+            </ul>
+            
+            <h3>3. חיפוש מדויק עם # 🎯</h3>
+            <p><strong>רוצים למצוא בדיוק כרטיסים עם תיוג ספציפי?</strong></p>
+            <p>הטריק: שימוש ב-<strong>#</strong> לפני שם התיוג</p>
+            <ul>
+                <li>כתיבת "decor" ← מחפש בכל מקום (תמונות, טקסטים, תיוגים)</li>
+                <li>כתיבת "#decor" ← רק כרטיסים עם התיוג הספציפי הזה</li>
+            </ul>
+            
+            <h3>4. קיצורי מקלדת שמאיצים הכל ⚡</h3>
+            <p><strong>הקיצורים החיוניים:</strong></p>
+            <ul>
+                <li><strong>N</strong> ← יצירת פתק חדש</li>
+                <li><strong>CMD/Ctrl + Enter</strong> ← שמירת פתק</li>
+                <li><strong>ESC</strong> ← יציאה מכרטיס</li>
+                <li><strong>Enter</strong> ← מיקוד על שורת החיפוש</li>
+            </ul>
+            
+            <h3>5. חיפוש הערות לפי זמן 📝</h3>
+            <p><strong>רוצים לראות *רק* את ההערות שרשמת השבוע?</strong></p>
+            <p>חפש "This week", לחץ על Enter, ולאחר מכן הוסף "Notes".</p>
+            
+            <h3>6. זיהוי יוצרים ואמנים 🎨</h3>
+            <p><strong>אם אתם רואים יצירה או עיצוב שאתם אוהבים ואתם סקרנים לדעת מי יצר אותה,</strong> רוב הסיכויים ש־mymind יוכל להגיד לכם מי היוצר. פשוט שמרו אותה ב־mymind ובדקו את התגיות האוטומטיות.</p>
+            
+            <h3>💡 טריקים נוספים לפאוור יוזרים:</h3>
+            <ul>
+                <li><strong>חיפוש שילובים:</strong> נסו לשלב חיפושים - "red chair 2023" למציאת כיסאות אדומים ששמרתם השנה</li>
+                <li><strong>חיפוש רגשות:</strong> נסו מילים כמו "calm", "energetic", "minimal" - mymind מבין גם את ההרגשה שהתמונה מעוררת</li>
+                <li><strong>חיפוש לפי מקור:</strong> כתבו את שם האתר (Instagram, Pinterest, Behance) כדי למצוא דברים ששמרתם מאתר ספציפי</li>
+            </ul>
+            
+            <h3>🚀 הטריק הסופי: הפכו את mymind לעוזר אישי</h3>
+            <p>במקום לחשוב על mymind כעל אפליקציה לשמירת דברים, חשבו עליו כעל הזיכרון החיצוני שלכם. כל דבר שמעניין אתכם - שמרו. אל תסננו, אל תארגנו מראש. תנו ל־mymind לעשות את העבודה הקשה.</p>
+            
+            <div class="conclusion-box">
+                <h3>💭 Bottom line</h3>
+                <p>mymind זה לא רק כלי לשמירת מידע - זה הרחבה של התודעה שלכם. והטריקים האלה הופכים אותו לכוח-על!</p>
+                <p><strong>💡 טיפ אחרון:</strong> התחילו עם טריק אחד בשבוע. אל תנסו הכל בבת אחת - תנו לעצמכם להתרגל לכל טריק לפני שעוברים לבא.</p>
+                <p><strong>🎯 והזכרו:</strong> הכלי הטוב ביותר הוא זה שאתם באמת משתמשים בו. אז מצאו את הטריקים שעובדים עבורכם ותהנו מהקסם של mymind!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        // Close modal when clicking on X
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            closeBtn.onclick = function() {
+                this.closest('.modal').style.display = "none";
+            }
+        });
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
